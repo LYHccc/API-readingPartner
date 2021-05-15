@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.readingpartner.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.readingpartner.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.readingpartner.model.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user (mobile, password, token
+      )
+    values (#{mobile,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.readingpartner.model.User">
+    update user
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, mobile, password, token
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, mobile, password, token
+    from user
+  </select>
+
+  <select id="selectUser" resultMap="BaseResultMap">
+    select id, mobile, password, token
+    from user
+    <where>
+      <if test="mobile != null and mobile.length() > 0">
+        mobile = #{mobile, jdbcType=VARCHAR}
+      </if>
+      <if test="password != null and password.length() > 0">
+        and password = #{password, jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByMobile" resultMap="BaseResultMap">
+    select id, mobile, password, token
+    from user
+    where mobile = #{mobile, jdbcType=VARCHAR}
+  </select>
+</mapper>
