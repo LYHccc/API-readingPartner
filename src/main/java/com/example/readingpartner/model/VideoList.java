@@ -11,12 +11,6 @@ public class VideoList {
 
     private String headUrl;
 
-    private Integer commentNum;
-
-    private Integer likeNum;
-
-    private Integer collectNum;
-
     private String playUrl;
 
     public Integer getVid() {
@@ -57,30 +51,6 @@ public class VideoList {
 
     public void setHeadUrl(String headUrl) {
         this.headUrl = headUrl == null ? null : headUrl.trim();
-    }
-
-    public Integer getCommentNum() {
-        return commentNum;
-    }
-
-    public void setCommentNum(Integer commentNum) {
-        this.commentNum = commentNum;
-    }
-
-    public Integer getLikeNum() {
-        return likeNum;
-    }
-
-    public void setLikeNum(Integer likeNum) {
-        this.likeNum = likeNum;
-    }
-
-    public Integer getCollectNum() {
-        return collectNum;
-    }
-
-    public void setCollectNum(Integer collectNum) {
-        this.collectNum = collectNum;
     }
 
     public String getPlayUrl() {

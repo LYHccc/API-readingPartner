@@ -16,11 +16,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 用户登录
+     */
     @PostMapping("/login")
     public LoginResponse login(@RequestBody User user) {
         return userService.login(user);
     }
 
+    /**
+     * 用户注册
+     */
     @PostMapping("/register")
     public LoginResponse register(@RequestBody User user) {
         return userService.register(user);

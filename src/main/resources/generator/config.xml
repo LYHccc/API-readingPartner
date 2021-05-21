@@ -41,18 +41,17 @@
         </javaClientGenerator>
 
         <!--要生成的表结构-->
-        <!--<table tableName="article" >-->
-            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
-            <!--<columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR" />-->
-        <!--</table>-->
-
         <!--<table tableName="user">-->
             <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
         <!--</table>-->
 
-        <table tableName="video_list" >
-            <generatedKey column="vid" sqlStatement="Mysql" identity="true"/>
-            <columnOverride column="play_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <!--<table tableName="video_list" >-->
+            <!--<generatedKey column="vid" sqlStatement="Mysql" identity="true"/>-->
+            <!--<columnOverride column="play_url" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+        <!--</table>-->
+
+        <table tableName="video_list_num" >
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>
 

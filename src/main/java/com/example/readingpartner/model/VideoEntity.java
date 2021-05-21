@@ -13,7 +13,6 @@ public class VideoEntity {
     private String author;
     private String coverurl;
     private String headurl;
-    private int commentNum;
-    private int likeNum;
-    private int collectNum;
+    private String playurl;
+    private VideoSocialEntity videoSocialEntity;
 }

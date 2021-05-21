@@ -7,9 +7,6 @@
     <result column="author" jdbcType="VARCHAR" property="author" />
     <result column="cover_url" jdbcType="VARCHAR" property="coverUrl" />
     <result column="head_url" jdbcType="VARCHAR" property="headUrl" />
-    <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
-    <result column="like_num" jdbcType="INTEGER" property="likeNum" />
-    <result column="collect_num" jdbcType="INTEGER" property="collectNum" />
     <result column="play_url" jdbcType="VARCHAR" property="playUrl" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -21,11 +18,9 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into video_list (vtitle, author, cover_url, 
-      head_url, comment_num, like_num, 
-      collect_num, play_url)
+      head_url, play_url)
     values (#{vtitle,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, 
-      #{headUrl,jdbcType=VARCHAR}, #{commentNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER}, 
-      #{collectNum,jdbcType=INTEGER}, #{playUrl,jdbcType=VARCHAR})
+      #{headUrl,jdbcType=VARCHAR}, #{playUrl,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.example.readingpartner.model.VideoList">
     update video_list
@@ -33,21 +28,23 @@
       author = #{author,jdbcType=VARCHAR},
       cover_url = #{coverUrl,jdbcType=VARCHAR},
       head_url = #{headUrl,jdbcType=VARCHAR},
-      comment_num = #{commentNum,jdbcType=INTEGER},
-      like_num = #{likeNum,jdbcType=INTEGER},
-      collect_num = #{collectNum,jdbcType=INTEGER},
       play_url = #{playUrl,jdbcType=VARCHAR}
     where vid = #{vid,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select vid, vtitle, author, cover_url, head_url, comment_num, like_num, collect_num, 
-    play_url
+    select vid, vtitle, author, cover_url, head_url, play_url
     from video_list
     where vid = #{vid,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select vid, vtitle, author, cover_url, head_url, comment_num, like_num, collect_num, 
-    play_url
+    select vid, vtitle, author, cover_url, head_url, play_url
     from video_list
+  </select>
+  <select id="selectCollectList" resultMap="BaseResultMap">
+    select vl.vid, vtitle, author, cover_url, head_url, play_url
+    from video_list vl
+    join video_list_num vlm
+    on vl.vid = vlm.vid
+    where vlm.flag_collect = 1;
   </select>
 </mapper>

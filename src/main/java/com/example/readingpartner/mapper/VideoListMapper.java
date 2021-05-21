@@ -14,4 +14,6 @@ public interface VideoListMapper {
     List<VideoList> selectAll();
 
     int updateByPrimaryKey(VideoList record);
+
+    List<VideoList> selectCollectList();
 }
