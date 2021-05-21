@@ -3,6 +3,7 @@ package com.example.readingpartner.service;
 import com.example.readingpartner.Response.MyCollectResponse;
 import com.example.readingpartner.Response.VideoListResponse;
 import com.example.readingpartner.Response.VideoUpdateResponse;
+import com.example.readingpartner.mapper.UserMapper;
 import com.example.readingpartner.mapper.VideoListMapper;
 import com.example.readingpartner.mapper.VideoListNumMapper;
 import com.example.readingpartner.model.*;
@@ -16,6 +17,8 @@ import java.util.List;
 public class VideoService {
 
     @Autowired
+    private UserMapper userMapper;
+    @Autowired
     private VideoListMapper videoListMapper;
     @Autowired
     private VideoListNumMapper videoListNumMapper;
@@ -23,7 +26,11 @@ public class VideoService {
     /**
      * 获取视频列表
      */
-    public VideoListResponse getVideoList() {
+    public VideoListResponse getVideoList(String token) {
+        User user = userMapper.selectByToken(token);
+        if (user == null) {
+            return VideoListResponse.ok();
+        }
         List<VideoList> videoLists = videoListMapper.selectAll();
         List<VideoEntity> videoEntityList = new ArrayList<>();
         for (VideoList videoList : videoLists) {

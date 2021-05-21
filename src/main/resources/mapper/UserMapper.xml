@@ -55,4 +55,10 @@
     from user
     where mobile = #{mobile, jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByToken" resultMap="BaseResultMap">
+    select id, mobile, password, token
+    from user
+    where token = #{token, jdbcType=VARCHAR}
+  </select>
 </mapper>

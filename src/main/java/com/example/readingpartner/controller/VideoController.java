@@ -3,6 +3,7 @@ package com.example.readingpartner.controller;
 import com.example.readingpartner.Response.MyCollectResponse;
 import com.example.readingpartner.Response.VideoListResponse;
 import com.example.readingpartner.Response.VideoUpdateResponse;
+import com.example.readingpartner.model.Token;
 import com.example.readingpartner.model.UpdateCountDTO;
 import com.example.readingpartner.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ public class VideoController {
     /**
      * 获取视频列表
      */
-    @GetMapping("/list")
-    public VideoListResponse list() {
-        return videoService.getVideoList();
+    @PostMapping("/list")
+    public VideoListResponse list(@RequestBody Token token) {
+        return videoService.getVideoList(token.getToken());
     }
 
     /**

@@ -25,4 +25,9 @@ public interface UserMapper {
      * 根据用户名查询用户
      */
     User selectByMobile(String mobile);
+
+    /**
+     * 根据token查询用户
+     */
+    User selectByToken(String token);
 }
